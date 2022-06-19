@@ -54,7 +54,10 @@ let data = Object.keys(mountains[0]);
 generateTableHead(table, data);
 generateTable(table, mountains);
 
-import statsArrayRoll from './dnd-funcs-javascript.js';
-
+//import statsArrayRoll from './dnd-funcs-javascript.js';
 //let stats = statsArrayRoll();
 //$("#display").val(parsed);   
+
+function changeColor() {
+    name.style.color = "blue";
+}
