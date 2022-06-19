@@ -5,6 +5,7 @@ function generateArrayOfNumbers(numbers) { // function to create number array st
 };
 
 let rolls = generateArrayOfNumbers(21); // dice rolls from 1-20
+console.log(rolls); // view
 
 function getMod(roll) { // what is the modifier for a given roll?
     return Math.round((roll - 11) / 2) //mods
@@ -12,32 +13,7 @@ function getMod(roll) { // what is the modifier for a given roll?
 
 let mods = rolls.map(getMod)// vector of mods
 
-console.log(rolls); // view
 console.log(mods); // view
-
-var rollsToMods = [{
-    "Ability Score": rolls,
-    "Ability Modifier": mods
-}]
-
-console.log(rollsToMods);
-
-// player level to challeng rating
-
-let levels = generateArrayOfNumbers(21); // player levels from 1-20
-console.log(levels); // view
-
-function levelToCR(level) { // what is the modifier for a given roll?
-    let playerCR = level / 4 //mods
-    if (playerCR < 1) {
-        return playerCR
-    } else {
-        return Math.round(playerCR)
-    }
-    }; 
-
-let playerCRs = levels.map(levelToCR);
-console.log(playerCRs); // view
 
 //  challenge ratings to proficiency bonuses
 
@@ -58,9 +34,77 @@ function getProf(CR) { // function to convert
 let profs = CRs.map(getProf) // vector of proficiencies
 console.log(profs); // view
 
-var CRToProfs = [{ // create table
-    "Challenge Rating": CRs,
-    "Proficiency Bonus": profs
-}]
+// player level to challenge rating
 
-console.log(CRToProfs); // view
+let levels = generateArrayOfNumbers(21); // player levels from 1-20
+console.log(levels); // view
+
+function levelToCR(level) { // converting player character level to challenge rating
+    let playerCR = level * 1.25 
+    if (playerCR < 1) {
+        return playerCR
+    } else {
+        return Math.round(playerCR)
+    }
+    }; 
+
+let playerCRs = levels.map(levelToCR);
+console.log(playerCRs); // view
+
+let playerProfs = playerCRs.map(getProf);
+console.log(playerProfs); 
+
+// dice rolling functions
+
+function D4Roll(n=1) { // function to roll a d4
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 4));
+}
+
+function D6Roll(n=1) { // function to roll a d6
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 6));
+}
+
+function D8Roll(n=1) { // function to roll a d6
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 8));
+}
+
+function D10Roll(n=1) { // function to roll a d6
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 10));
+}
+
+function D12Roll(n=1) { // function to roll a d6
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 12));
+}
+
+function D20Roll(n=1) { // function to roll a d6
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 20));
+}
+
+function D100Roll(n=1) { // function to roll a d6
+    return Array.from({length: n}, () => Math.ceil(Math.random() * 100));
+}
+
+// stats rolling
+
+function sum(x) { // function to sum an array
+    var tot = 0;
+    for (var i=0; i<x.length; i++) {
+        tot += Number(x[i])
+    }
+    return tot
+}
+
+function statsRoll() { // roll a single stat
+    var diceRolls = D6Roll(4);
+    let diceRollsSorted = diceRolls.sort().slice(1,4)
+    return sum(diceRollsSorted)
+}
+
+function statsArrayRoll() { // roll all six stats
+    return [statsRoll(),statsRoll(),statsRoll(),statsRoll(),statsRoll(),statsRoll()]
+}
+
+
+var diceRolls = Array(4);
+newDiceRolls = diceRolls.map(D6Roll);
+console.log(statsArrayRoll());
