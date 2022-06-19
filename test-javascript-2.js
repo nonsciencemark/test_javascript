@@ -4,17 +4,23 @@ function generateArrayOfNumbers(numbers) {
 };
 
 // dice rolls from 1-20
-var rolls = generateArrayOfNumbers(21);
-console.log(rolls); // view
+let rolls = generateArrayOfNumbers(21);
 
 // what is the modifier for a given roll?
 function getMod(roll) {
-    let mod = Math.round((roll - 11) / 2); // this is how the mods work
-    console.log(mod);
-}; // why is this console log? why doesn't return work?
+    let mods = [];
+    roll.forEach(item => mods.push(Math.round((item - 11) / 2)));
+    return mods
+    }; 
 
-// apply that function to the rolls array
-var mods = rolls.forEach(getMod);
+// vector of mods
+let mods = getMod(rolls);
 
-console.log(rolls);
-console.log(mods);
+// combine into array
+let rollsToMods = {
+    rolls,
+    mods
+}
+
+// show
+console.log(rollsToMods);
