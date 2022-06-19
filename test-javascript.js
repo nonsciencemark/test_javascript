@@ -54,18 +54,7 @@ let data = Object.keys(mountains[0]);
 generateTableHead(table, data);
 generateTable(table, mountains);
 
-function generateArrayOfNumbers(numbers) {
-    return [...Array(numbers).keys()].slice(1)
-}
+import statsArrayRoll from './dnd-funcs-javascript.js';
 
-var rolls = generateArrayOfNumbers(21);
-
-function getMod(roll) {
-    let mod = Math.round((roll - 11) / 2);
-    return (mod);
-};
-
-var mods = getMod(rolls);
-
-generateTableHead(table, rolls);
-generateTable(table, rolls);
+//let stats = statsArrayRoll();
+//$("#display").val(parsed);   
